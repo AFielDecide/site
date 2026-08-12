@@ -22,6 +22,10 @@
 <meta name="twitter:card" content="summary">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20x='19'%20y='19'%20width='26'%20height='26'%20fill='none'%20stroke='%23b3934a'%20stroke-width='5'%20transform='rotate(45%2032%2032)'/%3E%3Crect%20x='26'%20y='26'%20width='12'%20height='12'%20fill='none'%20stroke='%23b3934a'%20stroke-width='2'%20opacity='.5'%20transform='rotate(45%2032%2032)'/%3E%3C/svg%3E">
 <style>
+  @font-face{font-family:'Oswald';font-style:normal;font-weight:500;font-display:swap;
+    src:url(fonts/oswald-500.woff2) format('woff2')}
+  @font-face{font-family:'Oswald';font-style:normal;font-weight:700;font-display:swap;
+    src:url(fonts/oswald-700.woff2) format('woff2')}
   :root{
     --ink:#0b0b0c;
     --paper:#ffffff;
@@ -35,7 +39,7 @@
     --field-line:#26262a;
     --maxw:1120px;
     --measure:64ch;
-    --font-display:"Arial Narrow","Helvetica Neue Condensed",Impact,"Haettenschweiler",system-ui,sans-serif;
+    --font-display:"Oswald","Arial Narrow","Helvetica Neue Condensed",Impact,system-ui,sans-serif;
     --font-body:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     --font-mono:ui-monospace,"SF Mono","Cascadia Mono","Segoe UI Mono",Consolas,monospace;
   }
@@ -59,6 +63,8 @@
 
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--paper)}
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
   .wrap{background:var(--paper);color:var(--ink);font-family:var(--font-body);
     -webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden}
   .wrap img{max-width:100%}
@@ -88,7 +94,7 @@
 
   /* ---------- top bar ---------- */
   .topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 86%,transparent);
-    backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
   .topbar .row{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;
     justify-content:space-between;gap:1rem;padding:.7rem 1.5rem}
   .brand{display:flex;align-items:center;gap:.6rem;font-family:var(--font-display);
@@ -114,10 +120,10 @@
   .hero .eyebrow{color:var(--field-mute)}
   .kicker{font-family:var(--font-mono);font-size:.8rem;letter-spacing:.2em;
     text-transform:uppercase;color:var(--field-mute)}
-  .hero h1{font-size:clamp(3.4rem,15vw,9.5rem);color:var(--field-ink);margin:.4rem 0 0;
+  .hero h1{font-size:clamp(3.4rem,18vw,9.5rem);color:var(--field-ink);margin:.4rem 0 0;
     letter-spacing:-.01em}
   .hero .thesis{font-family:var(--font-display);text-transform:uppercase;
-    font-size:clamp(1.3rem,3.4vw,2.4rem);line-height:1;margin:1.6rem 0 0;color:var(--field-ink)}
+    font-size:clamp(1.5rem,4.2vw,2.4rem);line-height:1;margin:1.6rem 0 0;color:var(--field-ink)}
   .hero .thesis b{color:var(--glint)}
   .hero .sub{color:var(--field-mute);max-width:52ch;margin:1.5rem 0 0;font-size:1.05rem}
   .hero .cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.2rem}
