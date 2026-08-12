@@ -8,9 +8,9 @@ Este arquivo é público de propósito: qualquer torcedor pode ver, a qualquer m
 
 ## Mantenedores atuais
 
-| Pessoa | GitHub | Cuida de | Desde |
+| Mantenedor | GitHub | Cuida de | Desde |
 |---|---|---|---|
-| Allan Marcos | [@allansmarcos-ctrl](https://github.com/allansmarcos-ctrl) | Organização GitHub · site · repositório | ago/2026 |
+| Mantenedor 1 | [@allansmarcos-ctrl](https://github.com/allansmarcos-ctrl) | Organização GitHub · site · repositório | ago/2026 |
 | *vaga aberta* | — | — | — |
 | *vaga aberta* | — | — | — |
 
