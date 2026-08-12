@@ -32,7 +32,12 @@ Quando as consultas populares começarem, cada votação fecha com um **arquivo 
 
 | Arquivo | O que é |
 |---|---|
-| [`index.html`](index.html) | O site completo (estático — HTML puro, sem servidor "pensante") |
+| [`index.html`](index.html) | A capa do site (estático — HTML puro, sem servidor "pensante") |
+| `manifesto/ urna/ safiel/ carta/ nucleos/ transparencia/ perguntas/ imprensa/` | As 8 páginas internas, cada uma com URL própria |
+| [`styles.css`](styles.css) | Todo o visual do site (papel + preto, sombras duras, mosaico) |
+| [`site.js`](site.js) | JS mínimo em vanilla: contador da sangria, barra da meta, menu, compartilhar |
+| `fonts/` | Fontes auto-hospedadas (Archivo Black, Archivo, Courier Prime) — o site funciona offline |
+| [`404.html`](404.html) | Página de erro no mesmo estilo |
 | [`MANTENEDORES.md`](MANTENEDORES.md) | Quem cuida das chaves hoje + a regra dos 3 |
 | [`RECOMEÇAR.md`](RECOMEÇAR.md) | O teste do desaparecimento: como reerguer tudo do zero |
 | [`DOMINIO.md`](DOMINIO.md) | Como apontar o domínio próprio pro site |
