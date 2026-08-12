@@ -16,10 +16,16 @@
     setInterval(tick, 200);
   }
 
-  // Barra da meta: 1,5% placeholder até existir contagem real de assinaturas.
+  // Barra da meta. O site é estático e não consulta a API do Change.org, então a
+  // contagem entra à mão aqui. O piso de 1,5% é ornamento (a barra não some do
+  // layout); nenhum número de assinatura é exibido na página enquanto não houver
+  // volume — quem mostra a contagem real é a própria página do abaixo-assinado.
+  var ASSINATURAS = 0;
+  var META = 50000;
   var meta = document.getElementById('meta-bar');
   if (meta) {
-    setTimeout(function () { meta.style.width = '1.5%'; }, 500);
+    var pct = Math.max(1.5, (ASSINATURAS / META) * 100);
+    setTimeout(function () { meta.style.width = pct.toFixed(2) + '%'; }, 500);
   }
 
   // Menu mobile (< 860px)
@@ -59,11 +65,4 @@
     });
   });
 
-  // Abaixo-assinado: destino ainda não publicado (Change.org). Aviso no clique.
-  document.querySelectorAll('[data-petition]').forEach(function (a) {
-    a.addEventListener('click', function (e) {
-      e.preventDefault();
-      a.textContent = 'O abaixo-assinado entra no ar em breve — compartilhe enquanto isso.';
-    });
-  });
 })();
