@@ -138,7 +138,7 @@ Cada item lista a classe real. Use a classe, não recrie o estilo.
 - **`.navbar`**: sticky em `top: 36px`, `z-index: 55`, fundo `rgba(239,236,228,.94)` com `backdrop-filter: blur(8px)`, borda inferior 3px. À esquerda o `.logo` (faixa mais nome em display 16px). À direita `.nav-links` (visível a partir de 860px, hover mostra borda de 1.5px), o `.menu-btn` (abaixo de 860px) e o `.nav-sign` sempre visível.
 - **`.mobile-menu`**: painel preto full-width abaixo da barra, aberto pela classe `.open`. Oito páginas em display 20px, uma por linha, divisória `1px --rule-dark` e seta `→`. O botão controla `aria-expanded` e `aria-controls`.
 - **`.marquee-bottom`**: fita de papel com bordas de 3px em cima e embaixo, display grande, rolando no sentido contrário ao do topo.
-- **`footer`**: mono 12,5px com entrelinha 1.8, em quatro blocos: frase em display, `.foot-selo` com faixa e borda de 2px, `.foot-legal` até 74ch com o link do repositório sublinhado, e `.foot-hash` em display.
+- **`footer`**: mono 12,5px com entrelinha 1.8, em quatro blocos: frase em display, `.foot-selo` com faixa e borda de 2px, `.foot-legal` até 74ch com o link do repositório sublinhado, e `.foot-hash` em display, com `overflow-wrap: anywhere` — a hashtag `#DemocraciaCorinthianaDigital` é uma palavra só e estoura a caixa num celular de 375px sem isso.
 
 ### Capa
 
