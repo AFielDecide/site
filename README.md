@@ -35,6 +35,8 @@ Quando as consultas populares começarem, cada votação fecha com um **arquivo 
 | [`index.html`](index.html) | A capa do site (estático — HTML puro, sem servidor "pensante") |
 | `manifesto/ urna/ safiel/ carta/ nucleos/ transparencia/ perguntas/ imprensa/` | As 8 páginas internas, cada uma com URL própria |
 | [`styles.css`](styles.css) | Todo o visual do site (papel + preto, sombras duras, mosaico) |
+| [`design.md`](design.md) | O design system: tokens, tipografia, componentes e o que evitar |
+| [`design.html`](design.html) | O guia visual navegável, que carrega o `styles.css` de produção |
 | [`site.js`](site.js) | JS mínimo em vanilla: contador da sangria, barra da meta, menu, compartilhar |
 | `fonts/` | Fontes auto-hospedadas (Archivo Black, Archivo, Courier Prime) — o site funciona offline |
 | [`404.html`](404.html) | Página de erro no mesmo estilo |

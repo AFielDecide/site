@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design system · A Fiel Decide</title>
+<meta name="description" content="Guia visual do movimento A Fiel Decide: tokens, tipografia, texturas, sombra dura e componentes, carregados do styles.css de produção.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#efece4">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20fill='%23efece4'/%3E%3Crect%20x='19'%20y='19'%20width='26'%20height='26'%20fill='none'%20stroke='%230d0c0b'%20stroke-width='5'%20transform='rotate(45%2032%2032)'/%3E%3C/svg%3E">
+
+<!-- O CSS de produção. O guia não redefine nenhum componente: o que se vê aqui é o site. -->
+<link rel="stylesheet" href="styles.css">
+
+<style>
+/* ---------------------------------------------------------------
+   Andaime do guia. Prefixo dsg- para nunca colidir com o site.
+   Regra: nada aqui redefine componente de produção.
+   A única exceção é o bloco RESERVA, marcado na página.
+   --------------------------------------------------------------- */
+.dsg-wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.dsg-head{position:relative;z-index:1;padding:clamp(34px,5vw,64px) 20px clamp(18px,2.5vw,28px)}
+.dsg-sec{position:relative;z-index:1;padding:clamp(34px,4.6vw,64px) 20px;border-top:3px solid var(--ink)}
+.dsg-sec--dark{background:var(--ink);color:var(--on-dark)}
+.dsg-n{font-family:var(--f-mono);font-weight:700;font-size:12px;letter-spacing:.2em;
+  text-transform:uppercase;margin:0 0 10px;color:var(--gray)}
+.dsg-sec--dark .dsg-n{color:var(--on-dark-mute)}
+.dsg-h{font-family:var(--f-display);text-transform:uppercase;font-size:clamp(26px,4.4vw,52px);
+  line-height:.94;letter-spacing:-.03em;margin:0 0 6px}
+.dsg-intro{max-width:64ch;margin:14px 0 0;font-size:15.5px;line-height:1.62;color:var(--ink-soft);text-wrap:pretty}
+.dsg-sec--dark .dsg-intro{color:var(--on-dark-body)}
+.dsg-intro code,.dsg-spec code{font-family:var(--f-mono);font-size:.92em}
+.dsg-sub{font-family:var(--f-mono);font-weight:700;font-size:11.5px;letter-spacing:.18em;
+  text-transform:uppercase;margin:clamp(26px,3.2vw,40px) 0 14px;color:var(--gray);
+  border-bottom:2px solid var(--ink);padding-bottom:7px}
+.dsg-sec--dark .dsg-sub{color:var(--on-dark-mute);border-bottom-color:var(--rule-dark)}
+.dsg-spec{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;line-height:1.7;
+  color:var(--gray-src);margin:9px 0 0}
+.dsg-sec--dark .dsg-spec{color:var(--on-dark-mute)}
+.dsg-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.dsg-row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
+.dsg-stack{margin-top:clamp(22px,2.8vw,34px)}
+
+/* amostra de cor */
+.dsg-sw{border:2px solid var(--ink);background:var(--card)}
+.dsg-sw .chip{height:78px;display:block;border-bottom:2px solid var(--ink)}
+.dsg-sw .meta{padding:10px 11px 12px;display:flex;flex-direction:column;gap:3px}
+.dsg-sw .tok{font-family:var(--f-mono);font-weight:700;font-size:12px;letter-spacing:.05em}
+.dsg-sw .hex{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-src)}
+.dsg-sw .use{font-size:12.5px;line-height:1.45;color:var(--ink-soft)}
+.dsg-sec--dark .dsg-sw{background:#141210;border-color:var(--rule-dark)}
+.dsg-sec--dark .dsg-sw .chip{border-bottom-color:var(--rule-dark)}
+.dsg-sec--dark .dsg-sw .tok{color:var(--on-dark)}
+.dsg-sec--dark .dsg-sw .hex,.dsg-sec--dark .dsg-sw .use{color:var(--on-dark-mute)}
+
+/* caixa neutra para isolar um componente */
+.dsg-box{border:2px dashed var(--gray);padding:clamp(16px,2.2vw,26px);background:var(--paper)}
+.dsg-box--dark{background:var(--ink);border-color:var(--rule-dark)}
+.dsg-box--flush{padding:0;border-style:solid;border-color:var(--ink)}
+
+/* amostra de tipografia */
+.dsg-type{border-left:3px solid var(--ink);padding-left:16px;margin:0 0 clamp(20px,2.6vw,30px)}
+.dsg-type > *:first-child{margin-top:0}
+
+/* aviso */
+.dsg-warn{border:3px solid var(--ink);background:var(--card);padding:clamp(15px,2vw,22px);
+  box-shadow:6px 6px 0 var(--ink);max-width:74ch}
+.dsg-warn p{margin:8px 0 0;font-size:14.5px;line-height:1.6}
+.dsg-warn p:first-of-type{margin-top:0}
+.dsg-warn .tag{font-family:var(--f-mono);font-weight:700;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;display:block;margin-bottom:9px}
+
+/* ---------------------------------------------------------------
+   RESERVA: definido no design.md, ainda NAO existe no styles.css.
+   Ao implementar formulario ou botao desativado, mova estas regras
+   para o styles.css no mesmo commit e apague-as daqui.
+   --------------------------------------------------------------- */
+.dsg-field{display:flex;flex-direction:column;gap:7px;max-width:420px}
+.dsg-field label{font-family:var(--f-mono);font-weight:700;font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gray)}
+.dsg-field input,.dsg-field select{font-family:var(--f-body);font-size:16px;color:var(--ink);
+  background:var(--card);border:2px solid var(--ink);border-radius:0;min-height:48px;padding:0 13px;width:100%}
+.dsg-field .hint{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--gray-src)}
+.dsg-field--erro input{border-width:3px}
+.dsg-field--erro .hint{font-weight:700;color:var(--ink)}
+.dsg-off .btn{opacity:.45;box-shadow:none;cursor:not-allowed}
+.dsg-off .btn:hover{transform:none;box-shadow:none}
+
+@media(prefers-reduced-motion:reduce){
+  .dsg-sw,.dsg-box{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<div class="marquee-top" aria-hidden="true">
+  <div class="track">
+    <span>DESIGN SYSTEM / PAPEL E TINTA / CANTO RETO / SOMBRA DURA / SEM COR DE ACENTO / A ENFASE E A INVERSAO / DESIGN SYSTEM / PAPEL E TINTA / CANTO RETO / SOMBRA DURA / SEM COR DE ACENTO / A ENFASE E A INVERSAO / </span>
+    <span>DESIGN SYSTEM / PAPEL E TINTA / CANTO RETO / SOMBRA DURA / SEM COR DE ACENTO / A ENFASE E A INVERSAO / DESIGN SYSTEM / PAPEL E TINTA / CANTO RETO / SOMBRA DURA / SEM COR DE ACENTO / A ENFASE E A INVERSAO / </span>
+  </div>
+</div>
+
+<!-- ============================ CAPA ============================ -->
+<header class="dsg-head">
+  <div class="dsg-wrap">
+    <div class="hero-top">
+      <p class="kicker">Design system · A Fiel Decide<br>Guia visual · carrega o styles.css de produção</p>
+      <span class="stamp">Fonte da verdade</span>
+    </div>
+    <h1 class="mega" style="font-size:clamp(46px,11vw,150px)">Papel<br>e tinta.</h1>
+    <div class="mosaic"></div>
+    <p class="dsg-intro" style="max-width:56ch;font-size:clamp(15px,1.5vw,18px);margin-top:22px">
+      Esta página é a prova visual do sistema. Ela não tem CSS de componente próprio: importa o
+      <code>styles.css</code> do site, então cor, borda, sombra e tipografia aqui são exatamente as
+      que estão no ar. As regras escritas ficam no <a href="design.md" style="text-decoration:underline;text-underline-offset:3px"><code>design.md</code></a>, e os dois mudam no mesmo commit.
+    </p>
+  </div>
+</header>
+
+<!-- ============================ CORES ============================ -->
+<section class="dsg-sec">
+  <div class="dsg-wrap">
+    <p class="dsg-n">01 · Cores</p>
+    <h2 class="dsg-h">Não existe cor de acento.</h2>
+    <p class="dsg-intro">
+      Preto e branco carregam a identidade do clube. A ênfase vem da inversão, um bloco preto com
+      texto cor de papel, e não de uma terceira cor. Verde de sucesso e vermelho de erro estão fora
+      do sistema de propósito: assim que entra a quarta cor, a inversão perde a força.
+    </p>
+
+    <p class="dsg-sub">Sobre papel</p>
+    <div class="dsg-grid">
+      <div class="dsg-sw"><span class="chip" style="background:var(--paper)"></span><span class="meta"><span class="tok">--paper</span><span class="hex">#efece4</span><span class="use">Fundo geral, papel envelhecido</span></span></div>
+      <div class="dsg-sw"><span class="chip" style="background:var(--card)"></span><span class="meta"><span class="tok">--card</span><span class="hex">#f8f6f0</span><span class="use">Fundo de cartão sobre o papel</span></span></div>
+      <div class="dsg-sw"><span class="chip" style="background:var(--white)"></span><span class="meta"><span class="tok">--white</span><span class="hex">#ffffff</span><span class="use">Só o hover do cartão do Placar</span></span></div>
+      <div class="dsg-sw"><span class="chip" style="background:var(--ink)"></span><span class="meta"><span class="tok">--ink</span><span class="hex">#0d0c0b</span><span class="use">Texto, borda, sombra dura, bloco invertido</span></span></div>
+      <div class="dsg-sw"><span class="chip" style="background:var(--ink-soft)"></span><span class="meta"><span class="tok">--ink-soft</span><span class="hex">#3d3730</span><span class="use">Parágrafo secundário. 9,95:1</span></span></div>
+      <div class="dsg-sw"><span class="chip" style="background:var(--gray)"></span><span class="meta"><span class="tok">--gray</span><span class="hex">#6b655e</span><span class="use">Rótulo monoespaçado. 4,87:1</span></span></div>
+      <div class="dsg-sw"><span class="chip" style="background:var(--gray-src)"></span><span class="meta"><span class="tok">--gray-src</span><span class="hex">#5c554e</span><span class="use">Linha de fonte no cartão. 6,21:1</span></span></div>
+      <div class="dsg-sw"><span class="chip" style="background:var(--num-ghost)"></span><span class="meta"><span class="tok">--num-ghost</span><span class="hex">#c4bfb6</span><span class="use">Numeral 01/02/03. Ornamento, 1,69:1</span></span></div>
+      <div class="dsg-sw"><span class="chip" style="background:var(--shadow-on-paper)"></span><span class="meta"><span class="tok">--shadow-on-paper</span><span class="hex">#97928a</span><span class="use">Sombra do botão preto sobre papel</span></span></div>
+    </div>
+
+    <div class="dsg-stack">
+      <div class="dsg-warn">
+        <span class="tag">Exceção conhecida</span>
+        <p><code>--num-ghost</code> sobre <code>--card</code> dá <b>1,69:1</b> e não passa nem no critério
+        de texto grande. Hoje o numeral das cláusulas é ornamento e a ordem está no fluxo de leitura.
+        Se ele virar informação necessária, escureça para cerca de <code>#8f8981</code>, que atinge 3:1.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dsg-sec dsg-sec--dark">
+  <div class="dsg-wrap">
+    <p class="dsg-n">01b · Cores sobre tinta</p>
+    <h2 class="dsg-h">A inversão é o acento.</h2>
+    <p class="dsg-intro">
+      Sobre preto os tokens trocam de nome, não de lógica. A sombra também muda de cor conforme a
+      superfície, por isso são dois tokens e não um.
+    </p>
+    <div class="dsg-grid dsg-stack">
+      <div class="dsg-sw"><span class="chip" style="background:var(--on-dark)"></span><span class="meta"><span class="tok">--on-dark</span><span class="hex">#efece4</span><span class="use">Texto sobre preto</span></span></div>
+      <div class="dsg-sw"><span class="chip" style="background:var(--on-dark-mute)"></span><span class="meta"><span class="tok">--on-dark-mute</span><span class="hex">#9c968d</span><span class="use">Rótulo, fonte, descrição. 6,66:1</span></span></div>
+      <div class="dsg-sw"><span class="chip" style="background:var(--on-dark-body)"></span><span class="meta"><span class="tok">--on-dark-body</span><span class="hex">#b5afa6</span><span class="use">Corpo dentro do cartão preto</span></span></div>
+      <div class="dsg-sw"><span class="chip" style="background:var(--rule-dark)"></span><span class="meta"><span class="tok">--rule-dark</span><span class="hex">#3a352f</span><span class="use">Divisória e gap que vira linha</span></span></div>
+      <div class="dsg-sw"><span class="chip" style="background:var(--shadow-on-dark)"></span><span class="meta"><span class="tok">--shadow-on-dark</span><span class="hex">#55504a</span><span class="use">Sombra do botão sobre preto</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TIPOGRAFIA ============================ -->
+<section class="dsg-sec">
+  <div class="dsg-wrap">
+    <p class="dsg-n">02 · Tipografia</p>
+    <h2 class="dsg-h">Três famílias, nenhuma no CDN.</h2>
+    <p class="dsg-intro">
+      Archivo Black para display, Archivo para corpo, Courier Prime para rótulo. As três moram em
+      <code>fonts/</code> como <code>.woff2</code>. A cláusula do <code>RECOMEÇAR.md</code> exige que o
+      repositório clonado funcione offline, então fonte por CDN está proibida.
+      Os tamanhos abaixo são os reais: arraste a janela e eles respondem.
+    </p>
+
+    <p class="dsg-sub">Escala de display</p>
+
+    <div class="dsg-type">
+      <p class="mega" style="margin:0">A Fiel<br>Decide.</p>
+      <p class="dsg-spec">.mega · H1 da capa · clamp(58px, 14.5vw, 206px) · lh .84 · ls -.035em</p>
+    </div>
+
+    <div class="dsg-type">
+      <p class="page-title" style="margin:0">A Urna de Vidro</p>
+      <p class="dsg-spec">.page-title · H1 de página interna · clamp(40px, 9vw, 124px) · lh .86</p>
+    </div>
+
+    <div class="dsg-type">
+      <h3 class="sec-title" style="margin:0">A conta é terminal.<br>O poder é de pouca gente.</h3>
+      <p class="dsg-spec">.sec-title · H2 de seção · clamp(32px, 6vw, 76px) · lh .94</p>
+    </div>
+
+    <div class="dsg-type">
+      <p class="thesis" style="margin:0">O SAFiel traz o capital.<br>A Fiel traz o <span class="inv">mandato</span>.</p>
+      <p class="dsg-spec">.thesis · tese do hero · clamp(23px, 3.2vw, 40px) · lh 1.02 · a palavra-chave usa .inv, que inverte fundo e texto</p>
+    </div>
+
+    <p class="dsg-sub">Corpo e rótulo</p>
+
+    <div class="dsg-type">
+      <p class="lead" style="margin:0">Cada assinatura é um voto público pela democratização do clube. A urna é de vidro: qualquer um pode recontar.</p>
+      <p class="dsg-spec">.lead · linha de abertura · clamp(16px, 1.7vw, 21px) · lh 1.5 · até 58ch</p>
+    </div>
+
+    <div class="dsg-type">
+      <p class="hero-p" style="margin:0">Um time fundado por operários, governado por ~4 mil pessoas de portão fechado, com a nossa própria casa penhorada por dívida. A crise é de poder. <b>Negrito só em regra dura e número-chave.</b></p>
+      <p class="dsg-spec">.hero-p · corpo · clamp(15px, 1.4vw, 17.5px) · lh 1.6 · até 48ch · text-wrap: pretty</p>
+    </div>
+
+    <div class="dsg-type">
+      <p class="label" style="margin:0">O Placar Aberto · números que o clube já divulga</p>
+      <p class="dsg-spec">.label · rótulo de seção · Courier Prime 700 12px · ls .2em · caixa alta</p>
+    </div>
+
+    <div class="dsg-type">
+      <p class="kicker" style="margin:0">Democracia Corinthiana Digital · movimento independente da Fiel<br>São Paulo · Parque São Jorge · edição aberta, sem dono</p>
+      <p class="dsg-spec">.kicker · rótulo do hero · Courier Prime 700 12px · ls .2em · lh 1.7 · até 46ch</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TEXTURAS ============================ -->
+<section class="dsg-sec">
+  <div class="dsg-wrap">
+    <p class="dsg-n">03 · Texturas</p>
+    <h2 class="dsg-h">A gráfica inteira é CSS.</h2>
+    <p class="dsg-intro">
+      O site não tem uma imagem, um ícone ou um SVG externo. Gradiente repetido, quadrado girado e
+      sombra dura fazem todo o trabalho. A faixa listrada ocupa o lugar do escudo, que o movimento
+      não pode usar. O grão de papel está ligado nesta página inteira, em <code>opacity: .22</code>.
+    </p>
+
+    <p class="dsg-sub">Mosaico de arquibancada</p>
+    <div class="mosaic"></div>
+    <p class="dsg-spec">.mosaic · 14px · borda 2px · listras de 16px · animação mosaic, 8s linear infinito · vai sob o H1 da capa</p>
+
+    <div class="dsg-stack">
+      <div class="mosaic--thin mosaic" style="animation:none"></div>
+      <p class="dsg-spec">.mosaic--thin · 12px · listras de 14px · parado · vai sob o H1 das páginas internas</p>
+    </div>
+
+    <div class="dsg-stack">
+      <p class="dsg-sub">Faixa pequena e selo</p>
+      <div class="dsg-row" style="align-items:center">
+        <a class="logo" href="./" style="pointer-events:none"><span class="stripe"></span>A Fiel Decide</a>
+        <span class="foot-selo"><span class="stripe"></span>Movimento independente · não arrecada dinheiro</span>
+        <span class="stamp">Cópia livre · reproduza</span>
+      </div>
+      <p class="dsg-spec">.stripe · 22x12px no logotipo, 20x11px no selo · listras de 4px &nbsp;|&nbsp; .stamp · animação stampb, 3.6s</p>
+    </div>
+
+    <div class="dsg-stack">
+      <p class="dsg-sub">Barra da meta</p>
+      <div class="dsg-box dsg-box--dark">
+        <div class="meta-bar-wrap" style="margin-top:0"><div id="meta-bar" style="width:38%"></div></div>
+        <div class="meta-scale"><span>Começamos agora</span><span>50.000</span></div>
+      </div>
+      <p class="dsg-spec">#meta-bar · caixa de 28px, borda 3px --paper sobre --ink · preenchimento listrado · width anima em 1.6s cubic-bezier(.2,.7,.2,1) · aqui fixo em 38% só para demonstrar</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SOMBRA DURA ============================ -->
+<section class="dsg-sec">
+  <div class="dsg-wrap">
+    <p class="dsg-n">04 · Sombra dura</p>
+    <h2 class="dsg-h">O que se clica afunda.<br>O que se lê sobe.</h2>
+    <p class="dsg-intro">
+      A sombra é sempre <code>Npx Npx 0</code>, sem desfoque e sem cor. Essa é a regra que dá a cara do
+      sistema, e ela tem uma lógica única: botão afunda ao passar o mouse (translate positivo, sombra
+      menor), cartão sobe (translate negativo, sombra maior). Passe o mouse nos exemplos abaixo.
+      Não invente um terceiro comportamento.
+    </p>
+
+    <p class="dsg-sub">Botões sobre papel</p>
+    <div class="dsg-row">
+      <a class="btn btn--ink" href="#4">Assinar o abaixo-assinado</a>
+      <a class="btn btn--line" href="#4">Como a urna funciona →</a>
+    </div>
+    <p class="dsg-spec">.btn--ink · sólido, sombra 5px 5px 0 --shadow-on-paper &nbsp;|&nbsp; .btn--line · contorno, sombra 5px 5px 0 --ink &nbsp;|&nbsp; hover: translate(3px,3px) e sombra 1px 1px 0</p>
+
+    <div class="dsg-stack">
+      <p class="dsg-sub">Foco de teclado</p>
+      <p class="dsg-intro" style="margin-top:0">
+        Dê Tab até os botões acima. O anel é global: <code>outline: 3px solid currentColor</code> com
+        <code>outline-offset: 3px</code>. Não remova e não troque por sombra.
+      </p>
+    </div>
+
+    <div class="dsg-stack">
+      <p class="dsg-sub">Botões da navegação</p>
+      <div class="dsg-row" style="align-items:center">
+        <button class="menu-btn" type="button" style="display:flex"><span class="stripes-h"></span>Menu</button>
+        <a class="nav-sign" href="#4">Assinar</a>
+      </div>
+      <p class="dsg-spec">sombra 3px 3px 0 · hover: translate(2px,2px) e sombra 1px 1px 0 · o .menu-btn só aparece abaixo de 860px no site</p>
+    </div>
+  </div>
+</section>
+
+<section class="dsg-sec dsg-sec--dark">
+  <div class="dsg-wrap">
+    <p class="dsg-n">04b · Botões sobre tinta</p>
+    <h2 class="dsg-h">Uma tela tem um sólido só.</h2>
+    <p class="dsg-intro">
+      A ação principal usa a variante sólida, <code>--ink</code> sobre papel ou <code>--paper</code> sobre
+      tinta. As demais ficam de contorno. Dois sólidos na mesma tela anulam a hierarquia.
+    </p>
+    <div class="dsg-row dsg-stack">
+      <a class="btn btn--paper" href="#4">Assinar o abaixo-assinado</a>
+      <a class="btn btn--ghost" href="#4">Abrir um núcleo</a>
+      <a class="btn btn--ghost" href="#4">Compartilhar</a>
+    </div>
+    <p class="dsg-spec">.btn--paper · sólido &nbsp;|&nbsp; .btn--ghost · contorno · ambos com sombra 5px 5px 0 --shadow-on-dark</p>
+  </div>
+</section>
+
+<!-- ============================ COMPONENTES ============================ -->
+<section class="dsg-sec">
+  <div class="dsg-wrap">
+    <p class="dsg-n">05 · Componentes</p>
+    <h2 class="dsg-h">Use a classe.<br>Não recrie o estilo.</h2>
+    <p class="dsg-intro">
+      Cada peça abaixo é o componente real do site. Ao montar tela nova, componha com estas classes.
+      Componente inédito entra primeiro no <code>design.md</code>, depois aqui, e só então no site.
+    </p>
+
+    <p class="dsg-sub">Cartão do Placar · todo número com a fonte</p>
+    <div class="placar-grid" style="margin-top:0">
+      <div class="placar-card"><span class="num">R$ 2,72 bi</span><span class="lab">de dívida bruta em 2025</span><span class="src">Fonte: Exame / Poder360</span></div>
+      <div class="placar-card"><span class="num">35 mi</span><span class="lab">de corinthianos, sem voz formal</span><span class="src">Estimativa de torcida</span></div>
+      <div class="placar-card"><span class="num">~4 mil</span><span class="lab">sócios decidem o futuro de todos</span><span class="src">Fonte: MeuTimão (aptos, 2023)</span></div>
+    </div>
+    <p class="dsg-spec">.placar-card · borda 2px, sombra 5px, min-height 168px · hover sobe para 9px e o fundo vai a --white · a fonte fica no rodapé do cartão, empurrada por margin-top: auto</p>
+
+    <div class="dsg-stack">
+      <p class="dsg-sub">Cartão da sangria · o número vivo</p>
+      <div class="hero-grid" style="margin-top:0">
+        <div class="sangria">
+          <div class="head"><span>A sangria, ao vivo</span><span class="blip"></span></div>
+          <div class="num">R$ 12.480</div>
+          <div class="cap">é quanto o rombo cresceu <b>desde que você abriu esta página</b>. O juro não dorme. Quem manda hoje, dorme.</div>
+        </div>
+        <div>
+          <p class="dsg-spec" style="margin-top:0">.sangria · borda 3px, sombra 9px 9px 0, estática · cabeçalho com divisória tracejada de 2px e o ponto .blip pulsando em 1.4s · número em display com font-variant-numeric: tabular-nums, para o dígito não tremer enquanto conta</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="dsg-stack">
+      <p class="dsg-sub">Cláusula · o numeral é ornamento</p>
+      <div class="clausulas">
+        <div class="clausula"><span class="n">01</span><h3>Não arrecada dinheiro. Nunca.</h3><p>Nada de Pix, vaquinha ou fundo, por regra de fundação. Se alguém pedir dinheiro em nome do movimento, é golpe: denuncie.</p></div>
+        <div class="clausula"><span class="n">02</span><h3>Ponte com o Conselho</h3><p>O Conselho é convidado a entrar pra história como quem devolveu o clube ao povo.</p></div>
+      </div>
+      <p class="dsg-spec">.clausula · borda 3px, sombra 6px 6px 0 · hover sobe para 11px 11px 0 com translate(-3px,-3px) · o numeral usa --num-ghost e é ornamento, a ordem está no fluxo de leitura</p>
+    </div>
+
+    <div class="dsg-stack">
+      <p class="dsg-sub">Cartão de página interna</p>
+      <div class="blocks">
+        <div class="block"><span class="k">Como funciona</span><h3>Voto anônimo, apuração pública</h3><p>Cada votação fecha com um arquivo de apuração que qualquer um pode recontar em casa, sem pedir licença.</p></div>
+        <div class="block"><span class="k">O lacre</span><h3>Blockchain como cartório</h3><p>O resumo da apuração recebe um carimbo de tempo gratuito. Sem token, sem carteira, sem ninguém vendendo moedinha.</p></div>
+      </div>
+      <p class="dsg-spec">.block · o molde das 8 páginas internas · rótulo em mono, H3 em display, parágrafo em corpo 15px</p>
+    </div>
+
+    <div class="dsg-stack">
+      <p class="dsg-sub">Faixa de citação</p>
+      <div class="dsg-box dsg-box--flush">
+        <div class="quote-band" style="padding-left:24px;padding-right:24px">
+          <div class="inner">
+            <span class="q">“Ganhar ou perder, mas sempre com democracia.”</span>
+            <span class="src">Faixa da Fiel · Morumbi · dez/1983</span>
+          </div>
+        </div>
+      </div>
+      <p class="dsg-spec">.quote-band · bloco preto · citação em display e fonte em mono --on-dark-mute, alinhadas pela baseline</p>
+    </div>
+  </div>
+</section>
+
+<section class="dsg-sec dsg-sec--dark">
+  <div class="dsg-wrap">
+    <p class="dsg-n">05b · Componentes sobre tinta</p>
+    <h2 class="dsg-h">A linha é o vão.</h2>
+    <p class="dsg-intro">
+      Na grade de passos a divisória não é uma borda: é o <code>gap: 2px</code> deixando aparecer o fundo
+      <code>--rule-dark</code>. Truque de zine que o sistema usa em vez de empilhar bordas.
+    </p>
+
+    <div class="passos" style="margin-top:clamp(22px,2.8vw,34px)">
+      <div class="passo"><span class="n">PASSO 01</span><span class="t">Assine</span><span class="d">Um voto público pela democratização do clube.</span></div>
+      <div class="passo"><span class="n">PASSO 02</span><span class="t">Vote</span><span class="d">Entre no A Fiel Decide e decida a 1ª consulta.</span></div>
+      <div class="passo"><span class="n">PASSO 03</span><span class="t">Abra um núcleo</span><span class="d">Na sua quebrada, organizada ou grupo.</span></div>
+      <div class="passo"><span class="n">PASSO 04</span><span class="t">Passe pra frente</span><span class="d">Cada corinthiano que você chama tem o mesmo poder.</span></div>
+    </div>
+    <p class="dsg-spec">.passos · grid auto-fit minmax(210px,1fr) · gap 2px sobre --rule-dark · .passo escurece para #191714 no hover</p>
+
+    <div class="dsg-stack">
+      <p class="dsg-sub">Índice de páginas</p>
+      <div class="indice">
+        <a href="#5b"><span class="t">Manifesto</span><span class="d">Por que a crise não é de dinheiro, é de poder</span><span class="seta">→</span></a>
+        <a href="#5b"><span class="t">A Urna de Vidro</span><span class="d">Como cada voto é recontável por qualquer um</span><span class="seta">→</span></a>
+      </div>
+      <p class="dsg-spec">.indice a · borda superior 2px --rule-dark · hover desloca padding-left para 14px e clareia para --white</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ RESERVA ============================ -->
+<section class="dsg-sec">
+  <div class="dsg-wrap">
+    <p class="dsg-n">06 · Reserva</p>
+    <h2 class="dsg-h">Definido, ainda não no styles.css.</h2>
+    <div class="dsg-warn dsg-stack" style="margin-top:16px">
+      <span class="tag">Atenção</span>
+      <p>O site não tem formulário nem botão desativado hoje. As regras abaixo estão escritas no
+      <code>design.md</code> e demonstradas aqui com CSS local do guia, para que a urna e o
+      abaixo-assinado não sejam inventados na hora.</p>
+      <p><b>Ao implementar:</b> mova estas regras para o <code>styles.css</code> e apague o bloco
+      <code>RESERVA</code> do topo deste arquivo, no mesmo commit.</p>
+    </div>
+
+    <p class="dsg-sub">Campo de formulário</p>
+    <div class="dsg-row">
+      <div class="dsg-field">
+        <label for="dsg-nome">Nome completo</label>
+        <input id="dsg-nome" type="text" value="Maria da Silva">
+        <span class="hint">Repouso · fundo --card, borda 2px --ink, altura mínima 48px</span>
+      </div>
+      <div class="dsg-field dsg-field--erro">
+        <label for="dsg-cpf">CPF</label>
+        <input id="dsg-cpf" type="text" value="123.456">
+        <span class="hint">Erro · faltam dígitos. Borda vai a 3px e a mensagem fica em negrito</span>
+      </div>
+    </div>
+    <p class="dsg-spec">Canto reto, foco herdando o outline global. Sem vermelho: o texto carrega a informação do erro, e uma cor nova abriria a porta para a segunda cor decorativa. Nenhum formulário do movimento pode pedir Pix, doação ou dado de pagamento.</p>
+
+    <div class="dsg-stack">
+      <p class="dsg-sub">Botão desativado</p>
+      <div class="dsg-row dsg-off">
+        <span class="btn btn--ink" aria-disabled="true">Votação encerrada</span>
+        <span class="btn btn--line" aria-disabled="true">Resultado em apuração</span>
+      </div>
+      <p class="dsg-spec">opacity .45 · box-shadow: none · cursor: not-allowed · sem transform no hover. A sombra sumindo já comunica que não há o que afundar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MONTADO ============================ -->
+<section class="dsg-sec">
+  <div class="dsg-wrap">
+    <p class="dsg-n">07 · Montado</p>
+    <h2 class="dsg-h">Como as peças conversam.</h2>
+    <p class="dsg-intro">
+      Um trecho de página interna com o molde inteiro: voltar, rótulo, título, faixa fina, abertura,
+      cartões e o fecho invertido. Nenhuma classe nova.
+    </p>
+  </div>
+
+  <div class="dsg-stack" style="border:3px solid var(--ink);margin:clamp(22px,2.8vw,34px) 20px 0;max-width:1180px;margin-left:auto;margin-right:auto">
+    <div class="page-head" style="padding-top:clamp(24px,3.4vw,40px)">
+      <div class="wrap">
+        <span class="back">← Voltar pra capa</span>
+        <p class="label">A Urna de Vidro · como o voto é conferido</p>
+        <h2 class="page-title" style="font-size:clamp(34px,7vw,86px)">A urna<br>é de vidro.</h2>
+        <div class="mosaic--thin mosaic" style="animation:none"></div>
+        <p class="lead">Qualquer torcedor pode recontar os votos em casa. E o lacre fica registrado num cartório mundial que ninguém apaga, nem a gente.</p>
+      </div>
+    </div>
+    <div class="page-body" style="padding-top:clamp(14px,2vw,24px)">
+      <div class="wrap">
+        <div class="blocks">
+          <div class="block"><span class="k">Passo 01</span><h3>Voto anônimo</h3><p>O CPF nunca é guardado às claras. A coleta é mínima, por regra.</p></div>
+          <div class="block"><span class="k">Passo 02</span><h3>Arquivo público</h3><p>A votação fecha com um arquivo de apuração que qualquer um baixa e reconta.</p></div>
+          <div class="block"><span class="k">Passo 03</span><h3>Lacre gratuito</h3><p>Um carimbo de tempo na blockchain do Bitcoin. Cartório, não urna.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="page-cta">
+      <div class="inner">
+        <p>Leu e concorda? Então assina.</p>
+        <a class="btn btn--paper" href="#7">Assinar o abaixo-assinado</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ REGRAS ============================ -->
+<section class="dsg-sec dsg-sec--dark">
+  <div class="dsg-wrap">
+    <p class="dsg-n">08 · O resumo</p>
+    <h2 class="dsg-h">Faça / evite</h2>
+    <div class="passos" style="margin-top:clamp(22px,2.8vw,34px)">
+      <div class="passo"><span class="n">FAÇA</span><span class="t">Canto reto</span><span class="d">Borda sólida e sombra dura sem desfoque, em tudo.</span></div>
+      <div class="passo"><span class="n">FAÇA</span><span class="t">Inverta</span><span class="d">A ênfase vem do bloco preto, não de uma cor nova.</span></div>
+      <div class="passo"><span class="n">FAÇA</span><span class="t">Cite a fonte</span><span class="d">Número sem fonte não entra na tela.</span></div>
+      <div class="passo"><span class="n">FAÇA</span><span class="t">Um sólido</span><span class="d">Uma ação principal por tela. O resto de contorno.</span></div>
+      <div class="passo"><span class="n">EVITE</span><span class="t">Raio e blur</span><span class="d">border-radius, sombra desfocada, gradiente, brilho.</span></div>
+      <div class="passo"><span class="n">EVITE</span><span class="t">Cor solta</span><span class="d">Verde de sucesso e vermelho de erro estão fora.</span></div>
+      <div class="passo"><span class="n">EVITE</span><span class="t">O escudo</span><span class="d">Nenhum ativo oficial do clube, em contexto nenhum.</span></div>
+      <div class="passo"><span class="n">EVITE</span><span class="t">CDN e pressa</span><span class="d">Fonte mora em fonts/. Marquee não acelera.</span></div>
+    </div>
+    <p class="dsg-spec" style="margin-top:22px">
+      prefers-reduced-motion: reduce desliga tick, tickR, mosaic, grainshift, stampb, blip e todas as
+      transições de hover. Animação nova entra nesse bloco no mesmo commit.
+    </p>
+  </div>
+</section>
+
+<div class="marquee-bottom" aria-hidden="true">
+  <div class="track">
+    <span>Um sistema só se mantém se for obedecido ◆ Um sistema só se mantém se for obedecido ◆</span>
+    <span>Um sistema só se mantém se for obedecido ◆ Um sistema só se mantém se for obedecido ◆</span>
+  </div>
+</div>
+
+<footer>
+  <div class="inner">
+    <p class="foot-frase">O Corinthians é uma torcida que tem um time.</p>
+    <span class="foot-selo"><span class="stripe"></span>Design system · A Fiel Decide · agosto de 2026</span>
+    <p class="foot-legal">As regras escritas ficam em <a href="design.md">design.md</a>. Esta página carrega o <a href="styles.css">styles.css</a> de produção, e por isso não consegue divergir dele em cor, borda ou sombra. Mudou o estilo? Os três arquivos mudam no mesmo commit.</p>
+    <p class="foot-hash">#AFielDecide · #DemocraciaCorinthianaDigital</p>
+  </div>
+</footer>
+
+</body>
+</html>
