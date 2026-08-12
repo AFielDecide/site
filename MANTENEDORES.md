@@ -10,7 +10,7 @@ Este arquivo é público de propósito: qualquer torcedor pode ver, a qualquer m
 
 | Mantenedor | GitHub | Cuida de | Desde |
 |---|---|---|---|
-| Mantenedor 1 | [@allansmarcos-ctrl](https://github.com/allansmarcos-ctrl) | Organização GitHub · site · repositório | ago/2026 |
+| Mantenedor 1 | [@FielDecide-1](https://github.com/FielDecide-1) | Organização GitHub · site · repositório | ago/2026 |
 | *vaga aberta* | — | — | — |
 | *vaga aberta* | — | — | — |
 
