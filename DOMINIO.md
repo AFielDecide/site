@@ -1,6 +1,6 @@
 # ◆ DOMÍNIO — como apontar o endereço próprio pro site
 
-Guia pra ligar `afieldecide.com.br` (registrado no [registro.br](https://registro.br), ~R$ 40/ano — o único custo do movimento) ao site no GitHub Pages.
+Guia pra ligar `afieldecide.com.br` (registrado no [registro.br]  ), ~R$ 40/ano — o único custo do movimento) ao site no GitHub Pages.
 
 > Ainda sem domínio? O site funciona normalmente em `https://afieldecide.github.io/site/`. O domínio só deixa o endereço mais fácil de falar no rádio, no story e na arquibancada.
 
